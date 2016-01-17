@@ -11,7 +11,7 @@ $(document).ready(function () {
 			var price = productsCaptions[i].children[0];
 			productsIMG[i].setAttribute('src', 'img/' + products[i].category + '/' + products[i].name + '.png');
 			title.text = products[i].title;
-			price.innerHTML = '$' + parseInt(products[i].price.dollar + '.' + products[i].price.cent).toFixed(2);
+			price.innerHTML = '$' + parseFloat(products[i].price.dollar + '.' + products[i].price.cent).toFixed(2);
 			
 		}
 
