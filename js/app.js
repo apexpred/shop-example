@@ -2,6 +2,7 @@ $(document).ready(function () {
 
 	var product = $('.product');
 	var categories = $('.cat');
+	var addToCart = $('.add-to-cart');
 
 	genProductsHTML(products);
 
@@ -84,6 +85,9 @@ $(document).ready(function () {
 			genProductsHTML(products, $(this).data('category'));
 		}
 
+	});
+
+	addToCart.on('click', function () {
 		
 	})
 
