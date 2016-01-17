@@ -80,11 +80,37 @@ $(document).ready(function () {
 		cart.add(product);
 
 		var item = $('<li></li>');
+		var close = $('<i class="glyphicon glyphicon-remove"></i>')
 		item.text(product.title + ' - ' + '$' + parseFloat(product.price.dollar + '.' + product.price.cent).toFixed(2));
 		
-		total[0].innerHTML = cart.getTotal();
+		close.appendTo(item);
+
+		close.on('click', function () {
+			var index = $(this).parent().text().lastIndexOf('-');
+			var title = $(this).parent().text().slice(0, index).trim();
+			var removedProduct = products.filter(function (product) {
+				return product.title === title;
+			})[0];
+
+			removeProductFromCart(removedProduct);
+
+			$(this).parent().remove();
+			
+
+		})
+
+		updateTotal();
 
 		item.appendTo(cartItems);	
+	}
+
+	function removeProductFromCart(product) {
+		cart.remove(product);
+		updateTotal();
+	}
+
+	function updateTotal () {
+		total[0].innerHTML = cart.getTotal();
 	}
 
 	
@@ -130,5 +156,7 @@ $(document).ready(function () {
 
 		 addProductToCart(addedProduct);
 	});
+
+
 
 });

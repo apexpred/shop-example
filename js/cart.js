@@ -23,13 +23,14 @@ var cart = (function () {
 
 	var remove = function (product) {
 
-		total.dollar -= products.price.dollar;
+		total.dollar -= product.price.dollar;
 
-		if (total.cent < product.price.cent) {
-			total.cent = (total.cent - product.price.cent) + 100
+		if (total.cent < product.price.cent ) {
+			total.cent = (total.cent - product.price.cent) + 100;
+			total.dollar--;
 		}
 		else {
-			total.cent -= products.cent;
+			total.cent -= product.price.cent;
 		}
 
 		productsInCart = productsInCart.filter(function (item) {
