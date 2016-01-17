@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
 	var product = $('.product');
-	
+	var categories = $('.cat');
+
+	genProductsHTML(products);
+
 	//adds the title, price and image for each product
 	function genProductsHTML(products, typeOfProduct) {
 
@@ -28,6 +31,8 @@ $(document).ready(function () {
 				price.innerHTML = '$' + parseFloat(product.price.dollar + '.' + product.price.cent).toFixed(2);
 			});
 
+			
+
 		}
 
 		else {
@@ -46,9 +51,11 @@ $(document).ready(function () {
 				title.text = product.title;
 				price.innerHTML = '$' + parseFloat(product.price.dollar + '.' + product.price.cent).toFixed(2);
 			});
+
+			
 		}
 		
-		$('.products').children()[products.length].remove();
+		
 
 	}
 
@@ -65,6 +72,19 @@ $(document).ready(function () {
 		
 	}
 
-	genProductsHTML(products);
+	
+	categories.on('click', function (e) {
+		e.preventDefault();
+		$('.products').children().remove();
+
+		if ($(this).data('category') === 'all') {
+			genProductsHTML(products);
+		}
+		else {
+			genProductsHTML(products, $(this).data('category'));
+		}
+
+		
+	})
 
 });
