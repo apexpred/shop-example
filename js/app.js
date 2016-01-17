@@ -1,22 +1,70 @@
 $(document).ready(function () {
 
-	var productsIMG = $('.thumbnail img');
-	var productsCaptions = $('.thumbnail .caption');
-
+	var product = $('.product');
+	
 	//adds the title, price and image for each product
-	function genProductsHTML(numProducts) {
+	function genProductsHTML(products, typeOfProduct) {
 
-		for (var i = 0; i < numProducts; i++) {
-			var title = productsCaptions[i].children[1].children[0];
-			var price = productsCaptions[i].children[0];
-			productsIMG[i].setAttribute('src', 'img/' + products[i].category + '/' + products[i].name + '.png');
-			title.text = products[i].title;
-			price.innerHTML = '$' + parseFloat(products[i].price.dollar + '.' + products[i].price.cent).toFixed(2);
-			
+		var productsIMG;
+		var productsCaptions;
+		var sorted;
+
+		if (typeof typeOfProduct !== 'undefined' && typeOfProduct != null) {
+			sorted = genTypeOfProducts(products, typeOfProduct);
+			sorted.forEach(function () {
+				product.clone().appendTo('.products');
+			});
+
+			productsIMG = $('.thumbnail img');
+			productsCaptions = $('.thumbnail .caption');
+
+
+
+			sorted.forEach(function (product, index) {
+				var title = productsCaptions[index].children[1].children[0];
+				var price = productsCaptions[index].children[0];
+				productsIMG[index].setAttribute('src', 'img/' + product.category + '/' + product.name + '.png');
+				title.text = product.title;
+				price.innerHTML = '$' + parseFloat(product.price.dollar + '.' + product.price.cent).toFixed(2);
+			});
+
 		}
+
+		else {
+
+			products.forEach(function () {
+				product.clone().appendTo('.products');
+			});
+
+			productsIMG = $('.thumbnail img');
+			productsCaptions = $('.thumbnail .caption');
+
+			products.forEach(function (product, index) {
+				var title = productsCaptions[index].children[1].children[0];
+				var price = productsCaptions[index].children[0];
+				productsIMG[index].setAttribute('src', 'img/' + product.category + '/' + product.name + '.png');
+				title.text = product.title;
+				price.innerHTML = '$' + parseFloat(product.price.dollar + '.' + product.price.cent).toFixed(2);
+			});
+		}
+		
+		$('.products').children()[products.length].remove();
 
 	}
 
-	genProductsHTML(products.length);
+	//filters out the products based on its category you pass in and returns sorted products
+	function genTypeOfProducts(products, typeOfProduct) {
+		
+		var sortedProducts;
+
+		sortedProducts = products.filter(function (product) {
+			return product.category === typeOfProduct;
+		});
+
+		return sortedProducts;
+		
+	}
+
+	genProductsHTML(products);
 
 });
