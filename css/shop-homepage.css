@@ -54,7 +54,45 @@ footer {
     margin: 50px 0;
 }
 
+a {
+    color: #5D9CEC;
+}
+
+a:hover {
+    color: #9d9d9d;
+}
+
 .cart {
-    
     margin-bottom: 25px;
 }
+
+.navbar {
+    background: #F5F7FA;
+    border: 0;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #5D9CEC;
+}
+
+.navbar-inverse .navbar-brand:hover{
+    color: #4A89DC;
+}
+
+li i {
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+button {
+    padding: 10px;
+    background: white;
+    border: 0;
+    outline: 0;
+}
+
+button i {
+    color: #48CFAD;
+}
+
